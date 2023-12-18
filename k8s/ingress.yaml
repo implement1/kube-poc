@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kube-poc
+  labels:
+    app.kubernetes.io/name: kube-poc
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: contour
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: kube-poc
+                port:
+                  number: 8080
+      host: kube-poc.212.2.247.125.nip.io 

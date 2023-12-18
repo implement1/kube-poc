@@ -1,0 +1,19 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: kube-poc
+  labels:
+    app.kubernetes.io/name: kube-poc
+spec:
+  parentRefs:
+    - kind: Gateway
+      name: contour
+      namespace: projectcontour
+  hostnames:
+    - kube-poc212.2.247.125.nip.io
+  rules:
+    - backendRefs:
+        - kind: Service
+          name: kube-poc
+          port: 8080
